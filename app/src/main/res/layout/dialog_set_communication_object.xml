@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/line_host"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:labelFor="@+id/input_host"
+            android:text="@string/host" />
+
+        <EditText
+            android:id="@+id/input_host"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:background="@drawable/edit_background"
+            android:digits="0123456789."
+            android:inputType="number"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_illegal_host"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/illegal_ip_address"
+        android:textColor="@color/red"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/line_port"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:labelFor="@+id/input_port"
+            android:text="@string/port" />
+
+        <EditText
+            android:id="@+id/input_port"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:background="@drawable/edit_background"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_illegal_port"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/illegal_port_number"
+        android:textColor="@color/red"
+        android:visibility="gone" />
+
+</LinearLayout>

@@ -1,0 +1,46 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/user_interface">
+        <ListPreference
+            app:entries="@array/theme_entries"
+            app:entryValues="@array/theme_values"
+            app:iconSpaceReserved="false"
+            app:key="theme"
+            app:title="@string/theme"
+            app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            app:entries="@array/theme_color_entries"
+            app:entryValues="@array/theme_color_values"
+            app:iconSpaceReserved="false"
+            app:key="theme_color"
+            app:title="@string/theme_color"
+            app:useSimpleSummaryProvider="true" />
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="immersion_status_bar"
+            app:summary="@string/immersion_hint"
+            app:title="@string/immersion_status_bar" />
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="immersion_navigation_bar"
+            app:summary="@string/immersion_hint"
+            app:title="@string/immersion_navigation_bar" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/about">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="version"
+            app:summary="@string/app_version_name"
+            app:title="@string/version" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

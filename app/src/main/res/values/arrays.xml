@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="controller_menu">
+        <item>@string/edit</item>
+        <item>@string/delete</item>
+    </string-array>
+
+    <!-- Theme Preference -->
+    <string-array name="theme_entries">
+        <item>@string/light</item>
+        <item>@string/dark</item>
+        <item>@string/follow_system</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>follow_system</item>
+    </string-array>
+
+    <!-- Theme_Color Preference -->
+    <string-array name="theme_color_entries">
+        <item>@string/titian_red</item>
+        <item>@string/bordeaux_red</item>
+        <item>@string/marrs_green</item>
+        <item>@string/klein_blue</item>
+        <item>@string/sennelier_yellow</item>
+        <item>@string/lavender_purple</item>
+        <item>@string/white</item>
+    </string-array>
+
+    <string-array name="theme_color_values">
+        <item>titian_red</item>
+        <item>bordeaux_red</item>
+        <item>marrs_green</item>
+        <item>klein_blue</item>
+        <item>sennelier_yellow</item>
+        <item>lavender_purple</item>
+        <item>white</item>
+    </string-array>
+
+</resources>

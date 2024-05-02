@@ -1,0 +1,94 @@
+<resources>
+    <string name="app_name">WiFiRC</string>
+    <string name="app_version_name" translatable="false">1.0</string>
+
+    <!-- General -->
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="operation">Operation</string>
+
+    <!-- Colors -->
+    <string name="titian_red">Titian Red</string>
+    <string name="bordeaux_red">Bordeaux Red</string>
+    <string name="marrs_green">Marrs Green</string>
+    <string name="klein_blue">Klein Blue</string>
+    <string name="sennelier_yellow">Sennelier Yellow</string>
+    <string name="lavender_purple">Lavender Purple</string>
+    <string name="white">White</string>
+
+    <!-- Activity:MainActivity -->
+    <string name="settings">Settings</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+
+    <!-- Activity:EditController -->
+    <string name="create_controller">Create Controller</string>
+    <string name="edit_controller">Edit Controller</string>
+    <string name="reset">Reset</string>
+    <string name="complete">Complete</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="error">Error</string>
+    <string name="err_null_title">Title has not been input</string>
+    <string name="hint_following_error_occurred">Following error occurred:</string>
+    <string name="create_controller_success">Successfully created controller.</string>
+    <string name="edit_controller_success">Successfully edited controller.</string>
+    <string name="wrong_argument">Wrong argument.</string>
+
+    <!-- Activity:Controller -->
+    <!-- Menu Text -->
+    <string name="help">Help</string>
+    <!-- Remote Controller Text -->
+    <string name="host">Host</string>
+    <string name="port">Port</string>
+    <string name="colon" translatable="false">:</string>
+    <string name="set_communication_object">Set Communication Object</string>
+    <string name="power">Power</string>
+    <string name="up">Up</string>
+    <string name="left">Left</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="right">Right</string>
+    <string name="down">Down</string>
+    <string name="digit_1" translatable="false">1</string>
+    <string name="digit_2" translatable="false">2</string>
+    <string name="digit_3" translatable="false">3</string>
+    <string name="digit_4" translatable="false">4</string>
+    <string name="digit_5" translatable="false">5</string>
+    <string name="digit_6" translatable="false">6</string>
+    <string name="digit_7" translatable="false">7</string>
+    <string name="digit_8" translatable="false">8</string>
+    <string name="digit_9" translatable="false">9</string>
+    <string name="arrow_left" translatable="false">←</string>
+    <string name="digit_0" translatable="false">0</string>
+    <string name="identity_symbol" translatable="false">≡</string>
+    <!-- Code Reference Text -->
+    <string name="cmd_not_set">Command not set.</string>
+    <string name="non_existent_controller_data">Controller data is non existent.</string>
+    <string name="edit_cmd">Edit Command</string>
+    <string name="host_port">Host:Port</string>
+    <string name="illegal_ip_address">Illegal IP address.</string>
+    <string name="illegal_port_number">Illegal port number.</string>
+
+    <!-- Activity:Settings -->
+    <string name="user_interface">User‘s Interface</string>
+    <string name="theme">Theme</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="follow_system">Follow System</string>
+    <string name="theme_color">Theme Color</string>
+    <string name="immersion_navigation_bar">Immersion Navigation Bar</string>
+    <string name="immersion_status_bar">Immersion Status Bar</string>
+    <string name="immersion_hint">Only works when light theme is enabled</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
+
+    <!-- Service:WifiCommunicationService -->
+    <string name="connection_failed">Connection failed.</string>
+    <string name="connection_succeed">Connection succeed.</string>
+    <string name="sending_succeed">Sending succeed.</string>
+    <string name="connection_closed">Connection closed.</string>
+    <string name="help_controller">This remote controller uses TCP, so you should deploy a server before using it.\nOperations: \n- Short click a button to send the corresponding data to the server.\n- Long click a button to edit the corresponding data.</string>
+
+</resources>

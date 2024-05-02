@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#FFFF0000</color>
+    <color name="titian_red">#FFD44848</color>
+    <color name="bordeaux_red">#FF4C0013</color>
+    <color name="green">#FF00FF00</color>
+    <color name="marrs_green">#FF01847F</color>
+    <color name="klein_blue">#FF002FA7</color>
+    <color name="sennelier_yellow">#FFFBD26A</color>
+    <color name="lavender_purple">#FF967BB6</color>
+    <color name="grey">#FF7F7F7F</color>
+    <color name="light_grey">#FFD3D3D3</color>
+</resources>
