@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
 import com.android.wifirc.R;
@@ -57,23 +55,14 @@ public class EditController extends AppCompatActivity {
         // 初始化uiModeManager
         uiModeManager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
         // 设置界面
-        uiUtils = new UIUtils(this) {
+        uiUtils = new UIUtils() {
             @Override
-            public void whenEnabledNightMode() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }
+            public void nightAuto() {
+
             }
 
             @Override
-            public void whenDisabledNightMode() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }
+            public void nightNo() {
                 int color = ColorUtils.analyzeColor(EditController.this,
                         sharedPreferences.getString("theme_color", "white"));
                 if (sharedPreferences.getBoolean("immersion_status_bar", true)) {
@@ -90,12 +79,23 @@ public class EditController extends AppCompatActivity {
                 View decorView = getWindow().getDecorView();
                 if (color == Color.WHITE) {
                     decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    binding.toolbar2.setNavigationIcon(R.drawable.baseline_arrow_back_black);
                     binding.toolbar2.setTitleTextColor(Color.BLACK);
                 } else {
                     decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    binding.toolbar2.setNavigationIcon(R.drawable.baseline_arrow_back_white);
                     binding.toolbar2.setTitleTextColor(Color.WHITE);
                 }
-                binding.getRoot().setBackgroundColor(color);
+                binding.getRoot().setBackgroundColor(Color.WHITE);
+            }
+
+            @Override
+            public void nightYes() {
+                getWindow().setStatusBarColor(Color.BLACK);
+                getWindow().setNavigationBarColor(Color.BLACK);
+                binding.toolbar2.setBackgroundColor(Color.BLACK);
+                binding.toolbar2.setNavigationIcon(R.drawable.baseline_arrow_back_white);
+                binding.getRoot().setBackgroundColor(Color.BLACK);
             }
         };
         // 设置控件
@@ -214,7 +214,7 @@ public class EditController extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                uiUtils.refresh(EditController.this);
+                uiUtils.refresh(uiModeManager);
             }
         });
     }

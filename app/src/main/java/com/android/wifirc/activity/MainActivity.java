@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,7 +14,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,23 +47,14 @@ public class MainActivity extends AppCompatActivity {
         // 初始化uiModeManager
         uiModeManager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
         // 设置界面
-        uiUtils = new UIUtils(this) {
+        uiUtils = new UIUtils() {
             @Override
-            public void whenEnabledNightMode() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }
+            public void nightAuto() {
+
             }
 
             @Override
-            public void whenDisabledNightMode() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }
+            public void nightNo() {
                 int color = ColorUtils.analyzeColor(MainActivity.this,
                         sharedPreferences.getString("theme_color", "white"));
                 if (sharedPreferences.getBoolean("immersion_status_bar", true)) {
@@ -87,9 +76,20 @@ public class MainActivity extends AppCompatActivity {
                     decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                     binding.toolbar.setTitleTextColor(Color.WHITE);
                 }
-                binding.getRoot().setBackgroundColor(color);
+                binding.getRoot().setBackgroundColor(Color.WHITE);
+            }
+
+            @Override
+            public void nightYes() {
+                View decorView = getWindow().getDecorView();
+                decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                getWindow().setStatusBarColor(Color.BLACK);
+                getWindow().setNavigationBarColor(Color.BLACK);
+                binding.toolbar.setBackgroundColor(Color.BLACK);
+                binding.getRoot().setBackgroundColor(Color.BLACK);
             }
         };
+        UIUtils.setCurrentCustomNightMode(this, uiModeManager);
         // 设置控件
         // ActionBar
         setSupportActionBar(binding.toolbar);
@@ -116,11 +116,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         Log.v(TAG, "onResume");
         super.onResume();
-        // 重绘界面02
+        // 重绘界面
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                uiUtils.refresh(MainActivity.this);
+                UIUtils.setCurrentCustomNightMode(MainActivity.this, uiModeManager);
+                uiUtils.refresh(uiModeManager);
             }
         });
         // 设置遥控器列表

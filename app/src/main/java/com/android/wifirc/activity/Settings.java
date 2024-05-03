@@ -4,13 +4,11 @@ import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
@@ -39,23 +37,14 @@ public class Settings extends AppCompatActivity {
         // 初始化uiModeManager
         uiModeManager = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
         // 设置界面
-        uiUtils = new UIUtils(this) {
+        uiUtils = new UIUtils() {
             @Override
-            public void whenEnabledNightMode() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }
+            public void nightAuto() {
+
             }
 
             @Override
-            public void whenDisabledNightMode() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }
+            public void nightNo() {
                 int color = ColorUtils.analyzeColor(Settings.this,
                         sharedPreferences.getString("theme_color", "white"));
                 if (sharedPreferences.getBoolean("immersion_status_bar", true)) {
@@ -72,12 +61,23 @@ public class Settings extends AppCompatActivity {
                 View decorView = getWindow().getDecorView();
                 if (color == Color.WHITE) {
                     decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    binding.toolbar4.setNavigationIcon(R.drawable.baseline_arrow_back_black);
                     binding.toolbar4.setTitleTextColor(Color.BLACK);
                 } else {
                     decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                    binding.toolbar4.setNavigationIcon(R.drawable.baseline_arrow_back_white);
                     binding.toolbar4.setTitleTextColor(Color.WHITE);
                 }
-                binding.getRoot().setBackgroundColor(color);
+                binding.getRoot().setBackgroundColor(Color.WHITE);
+            }
+
+            @Override
+            public void nightYes() {
+                getWindow().setStatusBarColor(Color.BLACK);
+                getWindow().setNavigationBarColor(Color.BLACK);
+                binding.toolbar4.setBackgroundColor(Color.BLACK);
+                binding.toolbar4.setNavigationIcon(R.drawable.baseline_arrow_back_white);
+                binding.getRoot().setBackgroundColor(Color.BLACK);
             }
         };
         // 注册共享偏好改变监听器
@@ -88,41 +88,24 @@ public class Settings extends AppCompatActivity {
                 switch (key) {
                     case "theme":
                         String nightMode = sharedPreferences.getString("theme", "follow_system");
-                        Log.i(TAG, "NIGHT_MODE changed to" + nightMode);
-                        switch (nightMode) {
-                            case "light":
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                    uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
-                                } else {
-                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                                }
-                                break;
-                            case "dark":
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                    uiModeManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);
-                                } else {
-                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                        onResume();
+                        Log.i(TAG, "NIGHT_MODE changed to: " + nightMode);
+                        UIUtils.setCurrentCustomNightMode(Settings.this,uiModeManager);
+                        uiUtils.refresh(uiModeManager);
                         break;
                     case "theme_color":
                         String color = sharedPreferences.getString("theme_color", "white");
                         Log.i(TAG, "THEME_COLOR changed to" + color);
-                        uiUtils.refresh(Settings.this);
+                        uiUtils.refresh(uiModeManager);
                         break;
                     case "immersion_status_bar":
                         String isb = sharedPreferences.getBoolean("immersion_status_bar", true) ? "On" : "Off";
                         Log.i(TAG, "IMMERSION_STATUS_BAR changed to " + isb);
-                        uiUtils.refresh(Settings.this);
+                        uiUtils.refresh(uiModeManager);
                         break;
                     case "immersion_navigation_bar":
                         String inb = sharedPreferences.getBoolean("immersion_navigation_bar", true) ? "On" : "Off";
                         Log.i(TAG, "IMMERSION_NAVIGATION_BAR changed to " + inb);
-                        uiUtils.refresh(Settings.this);
+                        uiUtils.refresh(uiModeManager);
                         break;
                 }
             }
@@ -154,7 +137,7 @@ public class Settings extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                uiUtils.refresh(Settings.this);
+                uiUtils.refresh(uiModeManager);
             }
         });
     }
