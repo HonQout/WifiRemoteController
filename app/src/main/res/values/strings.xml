@@ -8,6 +8,9 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="operation">Operation</string>
+    <string name="jump">Jump</string>
+    <string name="open_external_link">Open External Link</string>
+    <string name="hint_open_link">Use system default browser to open %s?</string>
 
     <!-- Colors -->
     <string name="titian_red">Titian Red</string>
@@ -83,6 +86,8 @@
     <string name="immersion_hint">Only works when light theme is enabled</string>
     <string name="about">About</string>
     <string name="version">Version</string>
+    <string name="GitHub" translatable="false">GitHub</string>
+    <string name="GitHub_address" translatable="false">https://github.com/HonQout/WifiRemoteController</string>
 
     <!-- Service:WifiCommunicationService -->
     <string name="connection_failed">Connection failed.</string>

@@ -4,7 +4,7 @@
     tools:context="com.android.wifirc.activity.MainActivity">
     <item
         android:id="@+id/action_help"
-        android:icon="@drawable/baseline_help_outline_black"
+        android:icon="@mipmap/help"
         android:title="@string/help"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 </menu>

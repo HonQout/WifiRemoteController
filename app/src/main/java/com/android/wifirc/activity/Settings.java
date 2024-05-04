@@ -2,13 +2,19 @@ package com.android.wifirc.activity;
 
 import android.app.UiModeManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
@@ -89,7 +95,7 @@ public class Settings extends AppCompatActivity {
                     case "theme":
                         String nightMode = sharedPreferences.getString("theme", "follow_system");
                         Log.i(TAG, "NIGHT_MODE changed to: " + nightMode);
-                        UIUtils.setCurrentCustomNightMode(Settings.this,uiModeManager);
+                        UIUtils.setCurrentCustomNightMode(Settings.this, uiModeManager);
                         uiUtils.refresh(uiModeManager);
                         break;
                     case "theme_color":
@@ -106,6 +112,8 @@ public class Settings extends AppCompatActivity {
                         String inb = sharedPreferences.getBoolean("immersion_navigation_bar", true) ? "On" : "Off";
                         Log.i(TAG, "IMMERSION_NAVIGATION_BAR changed to " + inb);
                         uiUtils.refresh(uiModeManager);
+                        break;
+                    default:
                         break;
                 }
             }
@@ -146,6 +154,32 @@ public class Settings extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+        }
+
+        @Override
+        public boolean onPreferenceTreeClick(@NonNull Preference preference) {
+            String key = preference.getKey();
+            Log.i(TAG, "Clicked preference " + key);
+            switch (key) {
+                case "github":
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                    builder.setTitle(R.string.open_external_link);
+                    builder.setMessage(String.format(getString(R.string.hint_open_link), getString(R.string.GitHub_address)));
+                    builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(getString(R.string.GitHub_address)));
+                            startActivity(intent);
+                        }
+                    });
+                    builder.setNegativeButton(R.string.cancel, null);
+                    builder.create().show();
+                    break;
+                default:
+                    break;
+            }
+            return super.onPreferenceTreeClick(preference);
         }
     }
 }

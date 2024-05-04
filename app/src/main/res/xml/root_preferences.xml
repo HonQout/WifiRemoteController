@@ -41,6 +41,12 @@
             app:summary="@string/app_version_name"
             app:title="@string/version" />
 
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="github"
+            app:summary="@string/GitHub_address"
+            app:title="@string/GitHub" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

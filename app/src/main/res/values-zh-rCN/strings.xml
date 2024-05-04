@@ -59,4 +59,7 @@
     <string name="follow_system">跟随系统</string>
     <string name="light">浅色</string>
     <string name="dark">深色</string>
+    <string name="hint_open_link">使用系统默认浏览器打开%s？</string>
+    <string name="jump">跳转</string>
+    <string name="open_external_link">打开外部链接</string>
 </resources>
